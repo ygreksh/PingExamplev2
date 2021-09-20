@@ -7,23 +7,28 @@ namespace PingExample
 {
     public class TcpPinger
     {
-        public void Start(string host, string port)
+        private IPAddress Ip;
+        private int Port;
+        private IPEndPoint RemoteEndPoint;
+        private string Host;
+
+        public void Init(PingHost pingHost)
         {
-            IPAddress Ip = null;
-            IPEndPoint RemoteEndPoint;
+            Host = pingHost.Host;
+            Port = pingHost.Port;
+            if (!IPAddress.TryParse(Host, out Ip))
+            {
+                Ip = Dns.GetHostAddresses(Host).First();
+            }
+            RemoteEndPoint = new IPEndPoint(Ip, Port);
+        }
+        public void Start()
+        {
+            
             DateTime now = DateTime.Now;
 
             try
             {
-                if (!IPAddress.TryParse(host, out Ip))
-                {
-                    Ip = Dns.GetHostAddresses(host).First();
-                }
-
-                int Port = Int32.Parse(port);
-
-                RemoteEndPoint = new IPEndPoint(Ip, Port);
-
                 Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
                 socket.Blocking = true;
@@ -31,18 +36,18 @@ namespace PingExample
                 if (socket.Connected)
                 {
                     Console.WriteLine(
-                        $"{now.ToString("yyyy/MM/dd hh:mm:ss")} TCP Connect to {host}:{Port} ({Ip}:{Port}) success");
+                        $"{now.ToString("yyyy/MM/dd hh:mm:ss")} TCP Connect to {Host}:{Port} ({Ip}:{Port}) success");
                     socket.Close();
                 }
                 else
                 {
                     Console.WriteLine(
-                        $"{now.ToString("yyyy/MM/dd hh:mm:ss")} TCP Connect to {host}:{Port} ({Ip}:{Port}) fail");
+                        $"{now.ToString("yyyy/MM/dd hh:mm:ss")} TCP Connect to {Host}:{Port} ({Ip}:{Port}) fail");
                 }
             }
             catch (Exception e)
             {
-                Console.WriteLine($"{now.ToString("yyyy/MM/dd hh:mm:ss")} TCP Connect to {host} fail");
+                Console.WriteLine($"{now.ToString("yyyy/MM/dd hh:mm:ss")} TCP Connect to {Host} fail");
             }
         }
     }

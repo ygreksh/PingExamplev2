@@ -19,13 +19,13 @@ namespace PingExample
             
             string remoteHost;
             int portNumber;
-            
-            //remoteIpAddress = args[0];
-            remoteHost = "ya.ru";
+            HttpStatusCode httpStatusCode = HttpStatusCode.OK;
+            remoteHost = "127.0.0.1";
             portNumber = 80;
             PingHost pingHost = new PingHost();
             pingHost.Host = remoteHost;
             pingHost.Port = portNumber;
+            pingHost.StatusCode = httpStatusCode;
             
             //  классы
             var icmpPinger = new IcmpPinger(pingHost);
@@ -33,8 +33,9 @@ namespace PingExample
             var httpPinger = new HttpPinger();
             httpPinger.Init(pingHost);
             httpPinger.Start();
-            //var tcpPinger = new TcpPinger();
-            //tcpPinger.Start(remoteHost,portNumber);
+            var tcpPinger = new TcpPinger();
+            tcpPinger.Init(pingHost);
+            tcpPinger.Start();
             
             
 
