@@ -8,9 +8,16 @@ namespace PingExample
 {
     public class HttpPinger
     {
-        public async void Start(PingHost pingHost)
+        private IPAddress Ip { get; set; }
+        private string Host;
+        private HttpStatusCode _httpStatusCode;
+        public void Init(PingHost pingHost)
         {
-            string Host = pingHost.Host;
+            Host = pingHost.Host;
+            _httpStatusCode = pingHost.StatusCode;
+        }
+        public async void Start()
+        {
             IPAddress Ip;
             HttpResponseMessage responseMessage;
             using (HttpClient client = new HttpClient())

@@ -31,7 +31,8 @@ namespace PingExample
             var icmpPinger = new IcmpPinger(pingHost);
             icmpPinger.Start();
             var httpPinger = new HttpPinger();
-            httpPinger.Start(pingHost);
+            httpPinger.Init(pingHost);
+            httpPinger.Start();
             //var tcpPinger = new TcpPinger();
             //tcpPinger.Start(remoteHost,portNumber);
             
