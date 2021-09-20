@@ -11,6 +11,12 @@ namespace PingExample
         private IPAddress Ip { get; set; }
         private string Host;
         private HttpStatusCode _httpStatusCode;
+
+        public HttpPinger(PingHost pingHost)
+        {
+            Host = pingHost.Host;
+            _httpStatusCode = pingHost.StatusCode;
+        }
         public void Init(PingHost pingHost)
         {
             Host = pingHost.Host;
@@ -20,6 +26,7 @@ namespace PingExample
         {
             IPAddress Ip;
             HttpResponseMessage responseMessage;
+            string FullHost;
             using (HttpClient client = new HttpClient())
             {
                 DateTime now = DateTime.Now;
@@ -32,9 +39,13 @@ namespace PingExample
 
                     if (!Regex.IsMatch(Host,"^(http|https)://"))
                     {
-                        Host = "http://" + Host;
+                        FullHost = "http://" + Host;
                     }
-                    responseMessage = await client.GetAsync(Host);
+                    else
+                    {
+                        FullHost = Host;
+                    }
+                    responseMessage = await client.GetAsync(FullHost);
                     if (responseMessage.IsSuccessStatusCode)
                     {
                         Console.WriteLine($"{now.ToString("yyyy/MM/dd hh:mm:ss")} HTTP Connect to {Host} ({Ip}) success");

@@ -6,19 +6,37 @@ namespace PingExample
 {
     public class Pinger
     {
-        private IPAddress Ip;
-        private int Port;
-        public void Init(PingHost pingHost)
+        private PingHost _pingHost;
+
+        public Pinger(PingHost pingHost)
         {
-            Ip = IPAddress.Parse(pingHost.Host);
-            Port = pingHost.Port;
-            
+            _pingHost = pingHost;
         }
 
-        public void Start(PingHost pingHost)
+        public void Init(PingHost pingHost)
+        {
+            _pingHost = pingHost;
+        }
+
+        public void Start()
         {
             //IcmpPinger icmpPinger = new IcmpPinger();
             //icmpPinger.Start();
+            switch (_pingHost.PingProtocol)
+            {
+                case PingProtocol.ICMP:
+                    IcmpPinger icmpPinger = new IcmpPinger(_pingHost);
+                    icmpPinger.Start();
+                    break;
+                case PingProtocol.HTTP:
+                    HttpPinger httpPinger = new HttpPinger(_pingHost);
+                    httpPinger.Start();
+                    break;
+                case PingProtocol.TCP:
+                    TcpPinger tcpPinger = new TcpPinger(_pingHost);
+                    tcpPinger.Start();
+                    break;
+            }
         }
 
         public Task StartAsinc(CancellationToken cancellationToken)

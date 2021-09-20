@@ -12,7 +12,6 @@ namespace PingExample
         {
             try
             {
-                //bool fExists = File.Exists(distStorage);
                 using (StreamWriter sw = new StreamWriter(LogsFileName, true, System.Text.Encoding.Default))
                 {
                     sw.WriteLineAsync(logstring);

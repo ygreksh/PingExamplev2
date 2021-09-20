@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
@@ -26,17 +27,32 @@ namespace PingExample
             pingHost.Host = remoteHost;
             pingHost.Port = portNumber;
             pingHost.StatusCode = httpStatusCode;
-            
+
+            PingHost HostICMP = new PingHost() { Host = "127.0.0.1", Period = 1000, PingProtocol = PingProtocol.ICMP }; 
+            PingHost HostHTTP = new PingHost() { Host = "127.0.0.1", Period = 1000, PingProtocol = PingProtocol.HTTP, StatusCode = HttpStatusCode.OK}; 
+            PingHost HostTCP = new PingHost() { Host = "127.0.0.1", Period = 1000, PingProtocol = PingProtocol.TCP, Port = 80};
+
+            List<PingHost> Hosts = new List<PingHost>();
+            Hosts.Add(HostICMP);
+            Hosts.Add(HostHTTP);
+            Hosts.Add(HostTCP);
+
+            foreach (var host in Hosts)
+            {
+                Pinger pinger = new Pinger(host);
+                pinger.Start();
+            }
+            /*
             //  классы
             var icmpPinger = new IcmpPinger(pingHost);
             icmpPinger.Start();
-            var httpPinger = new HttpPinger();
-            httpPinger.Init(pingHost);
+            var httpPinger = new HttpPinger(pingHost);
+            //httpPinger.Init(pingHost);
             httpPinger.Start();
-            var tcpPinger = new TcpPinger();
-            tcpPinger.Init(pingHost);
+            var tcpPinger = new TcpPinger(pingHost);
+            //tcpPinger.Init(pingHost);
             tcpPinger.Start();
-            
+            */
             
 
             //  методы
