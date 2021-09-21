@@ -13,11 +13,7 @@ namespace PingExample
             _pingHost = pingHost;
         }
 
-        public void Init(PingHost pingHost)
-        {
-            _pingHost = pingHost;
-        }
-
+        
         public void Start()
         {
             //IcmpPinger icmpPinger = new IcmpPinger();

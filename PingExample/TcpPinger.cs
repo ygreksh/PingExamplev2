@@ -22,17 +22,7 @@ namespace PingExample
             }
             RemoteEndPoint = new IPEndPoint(Ip, Port);
         }
-
-        public void Init(PingHost pingHost)
-        {
-            Host = pingHost.Host;
-            Port = pingHost.Port;
-            if (!IPAddress.TryParse(Host, out Ip))
-            {
-                Ip = Dns.GetHostAddresses(Host).First();
-            }
-            RemoteEndPoint = new IPEndPoint(Ip, Port);
-        }
+        
         public void Start()
         {
             
