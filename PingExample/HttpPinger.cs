@@ -18,11 +18,11 @@ namespace PingExample
             Host = pingHost.Host;
             _httpStatusCode = pingHost.StatusCode;
         }
-        public void Init(PingHost pingHost)
+        public void SetLogger(PingLogger pingLogger)
         {
-            Host = pingHost.Host;
-            _httpStatusCode = pingHost.StatusCode;
+            _logger = pingLogger;
         }
+        
         public async void Start()
         {
             _logger = new PingLogger();

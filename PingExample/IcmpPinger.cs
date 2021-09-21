@@ -12,7 +12,10 @@ namespace PingExample
         {
             Host = pingHost.Host;
         }
-
+        public void SetLogger(PingLogger pingLogger)
+        {
+            _logger = pingLogger;
+        }
         public void Start()
         {
             DateTime now = DateTime.Now;

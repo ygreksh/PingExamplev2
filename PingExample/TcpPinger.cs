@@ -23,7 +23,10 @@ namespace PingExample
             }
             RemoteEndPoint = new IPEndPoint(Ip, Port);
         }
-        
+        public void SetLogger(PingLogger pingLogger)
+        {
+            _logger = pingLogger;
+        }        
         public void Start()
         {
             _logger = new PingLogger();
