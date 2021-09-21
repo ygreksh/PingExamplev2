@@ -12,12 +12,9 @@ namespace PingExample
         {
             _pingHost = pingHost;
         }
-
         
         public void Start()
         {
-            //IcmpPinger icmpPinger = new IcmpPinger();
-            //icmpPinger.Start();
             switch (_pingHost.PingProtocol)
             {
                 case PingProtocol.ICMP:
@@ -35,15 +32,5 @@ namespace PingExample
             }
         }
 
-        public Task StartAsinc(CancellationToken cancellationToken)
-        {
-            
-            return Task.CompletedTask;
-        }
-
-        public Task StopAsync(CancellationToken cancellationToken)
-        {
-            return Task.CompletedTask;
-        }
     }
 }

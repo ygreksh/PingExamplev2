@@ -11,6 +11,7 @@ namespace PingExample
         private IPAddress Ip { get; set; }
         private string Host;
         private HttpStatusCode _httpStatusCode;
+        private PingLogger _logger;
 
         public HttpPinger(PingHost pingHost)
         {
@@ -24,6 +25,7 @@ namespace PingExample
         }
         public async void Start()
         {
+            _logger = new PingLogger();
             IPAddress Ip;
             HttpResponseMessage responseMessage;
             string FullHost;
@@ -49,18 +51,19 @@ namespace PingExample
                     if (responseMessage.IsSuccessStatusCode)
                     {
                         Console.WriteLine($"{now.ToString("yyyy/MM/dd hh:mm:ss")} HTTP Connect to {Host} ({Ip}) success");
+                        _logger.WriteLog($"{now.ToString("yyyy/MM/dd hh:mm:ss")} HTTP Connect to {Host} ({Ip}) success");
                     }
                     else
                     {
                         Console.WriteLine($"{now.ToString("yyyy/MM/dd hh:mm:ss")} HTTP Connect to {Host} ({Ip}) fail");
+                        _logger.WriteLog($"{now.ToString("yyyy/MM/dd hh:mm:ss")} HTTP Connect to {Host} ({Ip}) fail");
                     }
     
                 }
                 catch (Exception e)
                 {
-                    //Console.WriteLine(e);
-                    Console.WriteLine($"{now.ToString("yyyy/MM/dd hh:mm:ss")} HTTP Connect to {Host} fail");
-                    //throw;
+                    Console.WriteLine($"{now.ToString("yyyy/MM/dd hh:mm:ss")} HTTP Connect to {Host} error");
+                    _logger.WriteLog($"{now.ToString("yyyy/MM/dd hh:mm:ss")} HTTP Connect to {Host} error");
                 }
             }
         }

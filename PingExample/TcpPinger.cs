@@ -11,6 +11,7 @@ namespace PingExample
         private int Port;
         private IPEndPoint RemoteEndPoint;
         private string Host;
+        private PingLogger _logger;
 
         public TcpPinger(PingHost pingHost)
         {
@@ -25,7 +26,7 @@ namespace PingExample
         
         public void Start()
         {
-            
+            _logger = new PingLogger();
             DateTime now = DateTime.Now;
 
             try
@@ -38,17 +39,20 @@ namespace PingExample
                 {
                     Console.WriteLine(
                         $"{now.ToString("yyyy/MM/dd hh:mm:ss")} TCP Connect to {Host}:{Port} ({Ip}:{Port}) success");
+                    _logger.WriteLog($"{now.ToString("yyyy/MM/dd hh:mm:ss")} TCP Connect to {Host}:{Port} ({Ip}:{Port}) success");
                     socket.Close();
                 }
                 else
                 {
                     Console.WriteLine(
                         $"{now.ToString("yyyy/MM/dd hh:mm:ss")} TCP Connect to {Host}:{Port} ({Ip}:{Port}) fail");
+                    _logger.WriteLog($"{now.ToString("yyyy/MM/dd hh:mm:ss")} TCP Connect to {Host}:{Port} ({Ip}:{Port}) fail");
                 }
             }
             catch (Exception e)
             {
-                Console.WriteLine($"{now.ToString("yyyy/MM/dd hh:mm:ss")} TCP Connect to {Host} fail");
+                Console.WriteLine($"{now.ToString("yyyy/MM/dd hh:mm:ss")} TCP Connect to {Host} error");
+                _logger.WriteLog($"{now.ToString("yyyy/MM/dd hh:mm:ss")} TCP Connect to {Host} error");
             }
         }
     }
