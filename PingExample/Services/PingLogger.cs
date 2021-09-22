@@ -12,6 +12,7 @@ namespace PingExample
         {
             try
             {
+                
                 using (StreamWriter sw = new StreamWriter(LogsFileName, true, System.Text.Encoding.Default))
                 {
                     sw.WriteLineAsync(logstring);
