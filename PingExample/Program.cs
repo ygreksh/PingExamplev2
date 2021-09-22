@@ -38,10 +38,10 @@ namespace PingExample
 
             string fileName = "config.json";
             ConfigManager configManager = new ConfigManager();
-            configManager.ReadFromFile(fileName);
+            /*
             configManager.Hosts = Hosts.ToArray();
             configManager.Write(fileName);
-            
+            */
             configManager.ReadFromFile(fileName);
             Hosts = configManager.Hosts.ToList();            
             
