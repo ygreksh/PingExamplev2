@@ -28,9 +28,9 @@ namespace PingExample
             pingHost.Port = portNumber;
             pingHost.StatusCode = httpStatusCode;
 
-            PingHost HostICMP = new PingHost() { Host = "127.0.0.1", Period = 1000, PingProtocol = PingProtocol.ICMP }; 
-            PingHost HostHTTP = new PingHost() { Host = "127.0.0.1", Period = 1000, PingProtocol = PingProtocol.HTTP, StatusCode = HttpStatusCode.OK}; 
-            PingHost HostTCP = new PingHost() { Host = "127.0.0.1", Period = 1000, PingProtocol = PingProtocol.TCP, Port = 80};
+            PingHost HostICMP = new PingHost() { Host = "8.8.8.8", Period = 1000, PingProtocol = PingProtocol.ICMP }; 
+            PingHost HostHTTP = new PingHost() { Host = "mail.ru", Period = 1000, PingProtocol = PingProtocol.HTTP, StatusCode = HttpStatusCode.OK}; 
+            PingHost HostTCP = new PingHost() { Host = "10.3.7.19", Period = 1000, PingProtocol = PingProtocol.TCP, Port = 21};
 
             Hosts.Add(HostICMP);
             Hosts.Add(HostHTTP);
@@ -38,10 +38,10 @@ namespace PingExample
 
             string fileName = "config.json";
             ConfigManager configManager = new ConfigManager();
-            /*
+          
             configManager.Hosts = Hosts.ToArray();
             configManager.Write(fileName);
-            */
+            
             configManager.ReadFromFile(fileName);
             Hosts = configManager.Hosts.ToList();            
             
