@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -6,12 +8,14 @@ namespace PingExample
 {
     public class Pinger
     {
-        private PingHost _pingHost;
+        private List<PingHost> _hosts;
         private PingLogger _logger;
+        private CancellationTokenSource cancelTokenSource;
+        private CancellationToken token;
 
-        public Pinger(PingHost pingHost)
+        public Pinger(List<PingHost> hosts)
         {
-            _pingHost = pingHost;
+            _hosts = hosts;
         }
 
         public void SetLogger(PingLogger pingLogger)
@@ -21,24 +25,50 @@ namespace PingExample
         
         public void Start()
         {
-            switch (_pingHost.PingProtocol)
+            cancelTokenSource = new CancellationTokenSource();
+            token = cancelTokenSource.Token;
+
+            foreach (var pinghost in _hosts)
             {
-                case PingProtocol.ICMP:
-                    IcmpPinger icmpPinger = new IcmpPinger(_pingHost);
-                    icmpPinger.SetLogger(_logger);
-                    icmpPinger.Start();
-                    break;
-                case PingProtocol.HTTP:
-                    HttpPinger httpPinger = new HttpPinger(_pingHost);
-                    httpPinger.SetLogger(_logger);
-                    httpPinger.Start();
-                    break;
-                case PingProtocol.TCP:
-                    TcpPinger tcpPinger = new TcpPinger(_pingHost);
-                    tcpPinger.SetLogger(_logger);
-                    tcpPinger.Start();
-                    break;
+                
+                Task.Run(() =>
+                {
+                    while (true)
+                    {
+
+                        if (token.IsCancellationRequested)
+                        {
+                            Console.WriteLine("Canceled");
+                            return;
+                        }
+                        switch (pinghost.PingProtocol)
+                        {
+                            case PingProtocol.ICMP:
+                                IcmpPinger icmpPinger = new IcmpPinger(pinghost);
+                                icmpPinger.SetLogger(_logger);
+                                icmpPinger.Start();
+                                break;
+                            case PingProtocol.HTTP:
+                                HttpPinger httpPinger = new HttpPinger(pinghost);
+                                httpPinger.SetLogger(_logger);
+                                httpPinger.Start();
+                                break;
+                            case PingProtocol.TCP:
+                                TcpPinger tcpPinger = new TcpPinger(pinghost);
+                                tcpPinger.SetLogger(_logger);
+                                tcpPinger.Start();
+                                break;
+                        }
+                        Thread.Sleep(pinghost.Period);
+                    }
+                });
+                
+                
             }
+        }
+        public void Stop()
+        {
+            cancelTokenSource.Cancel();
         }
 
     }
