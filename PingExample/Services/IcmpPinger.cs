@@ -19,7 +19,6 @@ namespace PingExample
         public void Start()
         {
             DateTime now = DateTime.Now;
-            _logger = new PingLogger();
             try
             {
                 Ping pingSender = new Ping ();

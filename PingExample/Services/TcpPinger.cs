@@ -29,7 +29,6 @@ namespace PingExample
         }        
         public void Start()
         {
-            _logger = new PingLogger();
             DateTime now = DateTime.Now;
 
             try

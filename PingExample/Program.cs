@@ -18,9 +18,10 @@ namespace PingExample
         public static async Task Main (string[] args)
         {
             List<PingHost> Hosts = new List<PingHost>();
+            PingLogger logger = new PingLogger("logs.txt");
             
-            PingHost HostICMP = new PingHost() { Host = "8.8.8.8", Period = 1000, PingProtocol = PingProtocol.ICMP }; 
-            PingHost HostHTTP = new PingHost() { Host = "mail.ru", Period = 1000, PingProtocol = PingProtocol.HTTP, StatusCode = HttpStatusCode.OK}; 
+            PingHost HostICMP = new PingHost() { Host = "8.8.8.8", Period = 2000, PingProtocol = PingProtocol.ICMP }; 
+            PingHost HostHTTP = new PingHost() { Host = "mail.ru", Period = 2000, PingProtocol = PingProtocol.HTTP, StatusCode = HttpStatusCode.OK}; 
             PingHost HostTCP = new PingHost() { Host = "192.168.1.1", Period = 1000, PingProtocol = PingProtocol.TCP, Port = 21};
 
             Hosts.Add(HostICMP);
@@ -38,6 +39,7 @@ namespace PingExample
             
             
             Pinger pinger = new Pinger(Hosts);
+            pinger.SetLogger(logger);
             pinger.Start();
             
             Console.ReadKey();

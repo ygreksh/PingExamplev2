@@ -25,7 +25,6 @@ namespace PingExample
         
         public async void Start()
         {
-            _logger = new PingLogger();
             IPAddress Ip;
             HttpResponseMessage responseMessage;
             string FullHost;

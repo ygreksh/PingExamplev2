@@ -6,7 +6,12 @@ namespace PingExample
     public class PingLogger
     {
         //private string HostsFileName = "hosts.json";
-        private string LogsFileName = "logs.txt";
+        private string LogsFileName;
+
+        public PingLogger(string logsFileName)
+        {
+            LogsFileName = logsFileName;
+        }
 
         public void WriteLog(string logstring)
         {
