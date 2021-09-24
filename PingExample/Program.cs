@@ -30,13 +30,11 @@ namespace PingExample
 
             string fileName = "config.json";
             ConfigManager configManager = new ConfigManager();
-                      
             configManager.Hosts = Hosts.ToArray();
             configManager.Write(fileName);
             
             configManager.ReadFromFile(fileName);
             Hosts = configManager.Hosts.ToList();            
-            
             
             Pinger pinger = new Pinger(Hosts);
             pinger.SetLogger(logger);
