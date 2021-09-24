@@ -18,20 +18,10 @@ namespace PingExample
         public static async Task Main (string[] args)
         {
             List<PingHost> Hosts = new List<PingHost>();
-            /*
-            string remoteHost;
-            int portNumber;
-            HttpStatusCode httpStatusCode = HttpStatusCode.OK;
-            remoteHost = "127.0.0.1";
-            portNumber = 80;
-            PingHost pingHost = new PingHost();
-            pingHost.Host = remoteHost;
-            pingHost.Port = portNumber;
-            pingHost.StatusCode = httpStatusCode;
-            */
+            
             PingHost HostICMP = new PingHost() { Host = "8.8.8.8", Period = 1000, PingProtocol = PingProtocol.ICMP }; 
             PingHost HostHTTP = new PingHost() { Host = "mail.ru", Period = 1000, PingProtocol = PingProtocol.HTTP, StatusCode = HttpStatusCode.OK}; 
-            PingHost HostTCP = new PingHost() { Host = "127.0.0.1", Period = 1000, PingProtocol = PingProtocol.TCP, Port = 21};
+            PingHost HostTCP = new PingHost() { Host = "192.168.1.1", Period = 1000, PingProtocol = PingProtocol.TCP, Port = 21};
 
             Hosts.Add(HostICMP);
             Hosts.Add(HostHTTP);
