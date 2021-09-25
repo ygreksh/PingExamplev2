@@ -24,7 +24,7 @@ namespace PingExample
             Hosts.Add(HostTCP);
 
             string fileName = "config.json";
-            ConfigManager configManager = new ConfigManager();
+            IConfigManager configManager = new ConfigManager();
             configManager.Hosts = Hosts.ToArray();
             configManager.Write(fileName);
             

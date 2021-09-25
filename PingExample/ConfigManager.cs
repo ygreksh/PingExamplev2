@@ -5,7 +5,7 @@ namespace PingExample
 {
     public class ConfigManager : IConfigManager
     {
-        public PingHost[] Hosts;
+        public PingHost[] Hosts { get; set; }
 
         public void Read(string fileName)
         {
