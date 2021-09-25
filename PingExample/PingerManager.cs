@@ -6,14 +6,14 @@ using PingExample.Interfaces;
 
 namespace PingExample
 {
-    public class Pinger : IPinger
+    public class PingerManager : IPingerManager
     {
         private List<PingHost> _hosts;
         private ILogger _logger;
         private CancellationTokenSource cancelTokenSource;
         private CancellationToken token;
 
-        public Pinger(List<PingHost> hosts)
+        public PingerManager(List<PingHost> hosts)
         {
             _hosts = hosts;
         }
@@ -25,7 +25,7 @@ namespace PingExample
             _logger = logger;
         }
 
-        public void Start()
+        public void StartPing()
         {
             cancelTokenSource = new CancellationTokenSource();
             token = cancelTokenSource.Token;
@@ -68,7 +68,7 @@ namespace PingExample
                 
             }
         }
-        public void Stop()
+        public void StopPing()
         {
             cancelTokenSource.Cancel();
         }

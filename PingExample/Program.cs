@@ -31,13 +31,13 @@ namespace PingExample
             configManager.Read(fileName);
             Hosts = configManager.Hosts.ToList();            
             
-            Pinger pinger = new Pinger(Hosts);
-            pinger.SetLogger(logger);
-            pinger.Start();
+            IPingerManager pingerManager = new PingerManager(Hosts);
+            pingerManager.SetLogger(logger);
+            pingerManager.StartPing();
             
             Console.ReadKey();
             
-            pinger.Stop();
+            pingerManager.StopPing();
             
         }
     }
