@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace PingExample
 {
-    public class ConfigManager
+    public class ConfigManager : IConfigManager
     {
         public PingHost[] Hosts;
 
