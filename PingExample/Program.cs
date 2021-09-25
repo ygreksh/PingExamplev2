@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Net.NetworkInformation;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
+using PingExample.Interfaces;
 
 namespace PingExample
 {
@@ -18,7 +13,7 @@ namespace PingExample
         public static async Task Main (string[] args)
         {
             List<PingHost> Hosts = new List<PingHost>();
-            PingLogger logger = new PingLogger("logs.txt");
+            ILogger logger = new Logger("logs.txt");
             
             PingHost HostICMP = new PingHost() { Host = "8.8.8.8", Period = 2000, PingProtocol = PingProtocol.ICMP }; 
             PingHost HostHTTP = new PingHost() { Host = "mail.ru", Period = 2000, PingProtocol = PingProtocol.HTTP, StatusCode = HttpStatusCode.OK}; 
@@ -33,7 +28,7 @@ namespace PingExample
             configManager.Hosts = Hosts.ToArray();
             configManager.Write(fileName);
             
-            configManager.ReadFromFile(fileName);
+            configManager.Read(fileName);
             Hosts = configManager.Hosts.ToList();            
             
             Pinger pinger = new Pinger(Hosts);

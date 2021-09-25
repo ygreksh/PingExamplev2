@@ -2,16 +2,17 @@ using System;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using PingExample.Interfaces;
 
 namespace PingExample
 {
-    public class TcpPinger
+    public class TcpPinger : IPinger
     {
         private IPAddress Ip;
         private int Port;
         private IPEndPoint RemoteEndPoint;
         private string Host;
-        private PingLogger _logger;
+        private ILogger _logger;
 
         public TcpPinger(PingHost pingHost)
         {
@@ -23,9 +24,9 @@ namespace PingExample
             }
             RemoteEndPoint = new IPEndPoint(Ip, Port);
         }
-        public void SetLogger(PingLogger pingLogger)
+        public void SetLogger(ILogger logger)
         {
-            _logger = pingLogger;
+            _logger = logger;
         }        
         public void Start()
         {

@@ -3,27 +3,30 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text.RegularExpressions;
+using PingExample.Interfaces;
 
 namespace PingExample
 {
-    public class HttpPinger
+    public class HttpPinger : IPinger
     {
         private IPAddress Ip { get; set; }
         private string Host;
         private HttpStatusCode _httpStatusCode;
-        private PingLogger _logger;
+        private ILogger _logger;
+        private IPinger _pingerImplementation;
 
         public HttpPinger(PingHost pingHost)
         {
             Host = pingHost.Host;
             _httpStatusCode = pingHost.StatusCode;
         }
-        public void SetLogger(PingLogger pingLogger)
-        {
-            _logger = pingLogger;
-        }
         
-        public async void Start()
+        public void SetLogger(ILogger logger)
+        {
+            _logger = logger;
+        }
+
+       public async void Start()
         {
             IPAddress Ip;
             HttpResponseMessage responseMessage;

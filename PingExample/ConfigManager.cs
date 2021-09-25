@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 
@@ -8,7 +7,7 @@ namespace PingExample
     {
         public PingHost[] Hosts;
 
-        public void ReadFromFile(string fileName)
+        public void Read(string fileName)
         {
             string path = Path.Combine(Directory.GetCurrentDirectory(), fileName);
 

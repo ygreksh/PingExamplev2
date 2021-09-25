@@ -1,15 +1,15 @@
 using System;
 using System.Collections.Generic;
-using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using PingExample.Interfaces;
 
 namespace PingExample
 {
-    public class Pinger
+    public class Pinger : IPinger
     {
         private List<PingHost> _hosts;
-        private PingLogger _logger;
+        private ILogger _logger;
         private CancellationTokenSource cancelTokenSource;
         private CancellationToken token;
 
@@ -18,11 +18,13 @@ namespace PingExample
             _hosts = hosts;
         }
 
-        public void SetLogger(PingLogger pingLogger)
-        {
-            _logger = pingLogger;
-        }
+
         
+        public void SetLogger(ILogger logger)
+        {
+            _logger = logger;
+        }
+
         public void Start()
         {
             cancelTokenSource = new CancellationTokenSource();

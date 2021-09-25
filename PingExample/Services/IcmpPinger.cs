@@ -1,20 +1,21 @@
 using System;
 using System.Net.NetworkInformation;
 using System.Text;
+using PingExample.Interfaces;
 
 namespace PingExample
 {
-    public class IcmpPinger
+    public class IcmpPinger : IPinger
     {
         private string Host;
-        private PingLogger _logger;
+        private ILogger _logger;
         public IcmpPinger(PingHost pingHost)
         {
             Host = pingHost.Host;
         }
-        public void SetLogger(PingLogger pingLogger)
+        public void SetLogger(ILogger logger)
         {
-            _logger = pingLogger;
+            _logger = logger;
         }
         public void Start()
         {

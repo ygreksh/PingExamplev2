@@ -3,12 +3,12 @@ using System.IO;
 
 namespace PingExample
 {
-    public class PingLogger
+    public class Logger : Interfaces.ILogger
     {
         //private string HostsFileName = "hosts.json";
         private string LogsFileName;
 
-        public PingLogger(string logsFileName)
+        public Logger(string logsFileName)
         {
             LogsFileName = logsFileName;
         }
