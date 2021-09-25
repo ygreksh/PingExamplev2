@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PingExample", "PingExample\PingExample.csproj", "{892713EE-58E5-469D-B2D8-D4A611746959}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PingExample.Tests", "PingExample.Tests\PingExample.Tests.csproj", "{66DB9926-7605-49D4-A24C-11287C0E10FA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{892713EE-58E5-469D-B2D8-D4A611746959}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{892713EE-58E5-469D-B2D8-D4A611746959}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{892713EE-58E5-469D-B2D8-D4A611746959}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66DB9926-7605-49D4-A24C-11287C0E10FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66DB9926-7605-49D4-A24C-11287C0E10FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66DB9926-7605-49D4-A24C-11287C0E10FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66DB9926-7605-49D4-A24C-11287C0E10FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
