@@ -27,7 +27,11 @@
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\Old_D\\INFO\\Программирование\\C Sharp\\PingExample\\PingExample\\PingExample.csproj": {
+                "projectPath": "D:\\Old_D\\INFO\\Программирование\\C Sharp\\PingExample\\PingExample\\PingExample.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -59,6 +63,66 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[2.4.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Old_D\\INFO\\Программирование\\C Sharp\\PingExample\\PingExample\\PingExample.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Old_D\\INFO\\Программирование\\C Sharp\\PingExample\\PingExample\\PingExample.csproj",
+        "projectName": "PingExample",
+        "projectPath": "D:\\Old_D\\INFO\\Программирование\\C Sharp\\PingExample\\PingExample\\PingExample.csproj",
+        "packagesPath": "C:\\Users\\ygrek\\.nuget\\packages\\",
+        "outputPath": "D:\\Old_D\\INFO\\Программирование\\C Sharp\\PingExample\\PingExample\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\ygrek\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
             }
           },
           "imports": [
