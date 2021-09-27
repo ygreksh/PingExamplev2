@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "J1aeu6SpcROozfSxfSu7DQr8NlcwwzQ8ObWwjfo+coHlVrX1MgUwe/Rr0JXyO8Z4+38fDbCoRhar+Fz3Ux1X4Q==",
+  "dgSpecHash": "bftw+ED2WwNaDIvN4StfJ7gvUmNApfG70puLu64UNp4f9cMdWG6etStlLUtlc4h2GTqQ0RPWkhJ8G6YwMquE3g==",
   "success": true,
-  "projectFilePath": "D:\\Old_D\\INFO\\Программирование\\C Sharp\\PingExample\\PingExample.Tests\\PingExample.Tests.csproj",
+  "projectFilePath": "D:\\Ygrek\\Программирование\\Csharp\\PingExamplev2\\PingExample.Tests\\PingExample.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ygrek\\.nuget\\packages\\coverlet.collector\\3.0.2\\coverlet.collector.3.0.2.nupkg.sha512",
     "C:\\Users\\ygrek\\.nuget\\packages\\microsoft.codecoverage\\16.9.4\\microsoft.codecoverage.16.9.4.nupkg.sha512",
