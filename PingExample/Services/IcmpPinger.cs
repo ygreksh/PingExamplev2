@@ -12,6 +12,7 @@ namespace PingExample
         private PingReply previousReply;
         private PingReply currentReply;
         private bool changedStatus = false;
+        private bool started = false;
         private DateTime previousDateTime;
         private DateTime currentDateTime;
         public IcmpPinger(PingHost pingHost)
@@ -27,13 +28,18 @@ namespace PingExample
             currentDateTime = DateTime.Now;
             try
             {
-                Ping pingSender = new Ping ();
-                PingOptions options = new PingOptions ();
+                Ping pingSender = new Ping();
+                PingOptions options = new PingOptions();
                 options.DontFragment = true;
                 string data = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-                byte[] buffer = Encoding.ASCII.GetBytes (data);
+                byte[] buffer = Encoding.ASCII.GetBytes(data);
                 int timeout = 120;
-                currentReply = pingSender.Send (Host, timeout, buffer, options);
+                currentReply = pingSender.Send(Host, timeout, buffer, options);
+                if (!started)
+                {
+                    previousDateTime = currentDateTime;
+                    previousReply = currentReply;
+                }
                 if (previousReply.Status != currentReply.Status)
                 {
                     changedStatus = true;
@@ -53,8 +59,8 @@ namespace PingExample
                 /*
                 else
                 {
-                    Console.WriteLine ($"{now.ToString("yyyy/MM/dd hh:mm:ss")} ICMP connect to {Host} ({reply.Address.ToString ()}) fail");
-                    _logger.WriteLog($"{now.ToString("yyyy/MM/dd hh:mm:ss")} ICMP connect to {Host} ({reply.Address.ToString ()}) fail");
+                    Console.WriteLine ($"{currentDateTime.ToString("yyyy/MM/dd hh:mm:ss")} ICMP connect to {Host} ({currentReply.Address.ToString ()}) fail");
+                    _logger.WriteLog($"{currentDateTime.ToString("yyyy/MM/dd hh:mm:ss")} ICMP connect to {Host} ({currentReply.Address.ToString ()}) fail");
                 }
                 */
                 previousReply = currentReply;
