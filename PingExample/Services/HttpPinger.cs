@@ -65,17 +65,17 @@ namespace PingExample
                     responseMessage = await client.GetAsync(FullHost);
                     if (!isStarted)
                     {
-                        currentStatus = responseMessage.StatusCode;
+                        previousStatus = responseMessage.StatusCode;
                         isStarted = true;
                     }
-                    previousStatus = responseMessage.StatusCode;
+                    currentStatus = responseMessage.StatusCode;
                     if (previousStatus == currentStatus)
                     {
                         previousDateTime = currentDateTime;
                     }
                     
                     
-                    if (responseMessage.StatusCode == _httpStatusCode)
+                    if (previousStatus != currentStatus && (previousStatus == _httpStatusCode || currentStatus == _httpStatusCode))
                     {
                         Console.WriteLine($"{previousDateTime.ToString("yyyy/MM/dd hh:mm:ss")} HTTP Connect to {Host} ({Ip}) success");
                         Console.WriteLine($"{currentDateTime.ToString("yyyy/MM/dd hh:mm:ss")} HTTP Connect to {Host} ({Ip}) success");
