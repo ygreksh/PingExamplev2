@@ -12,7 +12,6 @@ namespace PingExample
         private ILogger _logger;
         private PingReply previousReply;
         private PingReply currentReply;
-        private bool changedStatus = false;
         private bool started = false;
         private DateTime previousDateTime;
         private DateTime currentDateTime;
@@ -39,48 +38,36 @@ namespace PingExample
                     byte[] buffer = Encoding.ASCII.GetBytes(data);
                     int timeout = 120;
                     currentReply = pingSender.Send(Host, timeout, buffer, options);
+                    
                     if (!started)
                     {
                         previousDateTime = currentDateTime;
                         previousReply = currentReply;
+                        started = true;
                     }
-
+                    
                     if (previousReply.Status != currentReply.Status)
                     {
-                        changedStatus = true;
-                    }
-                    else
-                    {
-                        changedStatus = false;
+                        Console.WriteLine(
+                            $"{previousDateTime.ToString("yyyy/MM/dd hh:mm:ss")} ICMP connect to {Host} ({previousReply.Address.ToString()}) {previousReply.Status}");
+                        Console.WriteLine(
+                            $"{currentDateTime.ToString("yyyy/MM/dd hh:mm:ss")} ICMP connect to {Host} ({currentReply.Address.ToString()}) {currentReply.Status}");
+                        
+                        _logger.WriteLog(
+                            $"{previousDateTime.ToString("yyyy/MM/dd hh:mm:ss")} ICMP connect to {Host} ({previousReply.Address.ToString()}) {previousReply.Status}");
+                        _logger.WriteLog(
+                            $"{currentDateTime.ToString("yyyy/MM/dd hh:mm:ss")} ICMP connect to {Host} ({currentReply.Address.ToString()}) {currentReply.Status}");
+                        
                     }
 
-                    if (changedStatus)
-                    {
-                        //Console.WriteLine ($"{now.ToString("yyyy/MM/dd hh:mm:ss")} {reply.Address.ToString ()} time={reply.RoundtripTime} TTL={reply.Options.Ttl}");
-                        Console.WriteLine(
-                            $"{previousDateTime.ToString("yyyy/MM/dd hh:mm:ss")} ICMP connect to {Host} ({previousReply.Address.ToString()}) success");
-                        Console.WriteLine(
-                            $"{currentDateTime.ToString("yyyy/MM/dd hh:mm:ss")} ICMP connect to {Host} ({currentReply.Address.ToString()}) success");
-                        _logger.WriteLog(
-                            $"{previousDateTime.ToString("yyyy/MM/dd hh:mm:ss")} ICMP connect to {Host} ({previousReply.Address.ToString()}) success");
-                        _logger.WriteLog(
-                            $"{currentDateTime.ToString("yyyy/MM/dd hh:mm:ss")} ICMP connect to {Host} ({currentReply.Address.ToString()}) success");
-                    }
-
-                    /*
-                    else
-                    {
-                        Console.WriteLine ($"{currentDateTime.ToString("yyyy/MM/dd hh:mm:ss")} ICMP connect to {Host} ({currentReply.Address.ToString ()}) fail");
-                        _logger.WriteLog($"{currentDateTime.ToString("yyyy/MM/dd hh:mm:ss")} ICMP connect to {Host} ({currentReply.Address.ToString ()}) fail");
-                    }
-                    */
                     previousReply = currentReply;
                     previousDateTime = currentDateTime;
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine ($"{currentDateTime.ToString("yyyy/MM/dd hh:mm:ss")} ICMP connect to {Host} error");
-                    _logger.WriteLog($"{currentDateTime.ToString("yyyy/MM/dd hh:mm:ss")} ICMP connect to {Host} error");
+                    Console.WriteLine(e);
+                    //_logger.WriteLog($"{currentDateTime.ToString("yyyy/MM/dd hh:mm:ss")} ICMP connect to {Host} error");
                 }
                 Thread.Sleep(Period);
             }

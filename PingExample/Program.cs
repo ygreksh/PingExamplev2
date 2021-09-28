@@ -9,19 +9,18 @@ namespace PingExample
 {
     class Program
     {
-        // args[0] can be an IPaddress or host name.
         public static async Task Main (string[] args)
         {
             List<PingHost> Hosts = new List<PingHost>();
             ILogger logger = new Logger("logs.txt");
             
-            PingHost HostICMP = new PingHost() { Host = "127.0.0.1", Period = 2000, PingProtocol = PingProtocol.ICMP }; 
-            PingHost HostHTTP = new PingHost() { Host = "mail.ru", Period = 2000, PingProtocol = PingProtocol.HTTP, StatusCode = HttpStatusCode.OK}; 
-            PingHost HostTCP = new PingHost() { Host = "192.168.1.1", Period = 1000, PingProtocol = PingProtocol.TCP, Port = 21};
+            PingHost HostICMP = new PingHost() { Host = "10.3.7.35", Period = 1000, PingProtocol = PingProtocol.ICMP }; 
+            PingHost HostHTTP = new PingHost() { Host = "10.3.7.19", Period = 1000, PingProtocol = PingProtocol.HTTP, StatusCode = HttpStatusCode.OK}; 
+            PingHost HostTCP = new PingHost() { Host = "10.3.7.18", Period = 1000, PingProtocol = PingProtocol.TCP, Port = 80};
 
-            Hosts.Add(HostICMP);
+            //Hosts.Add(HostICMP);
             Hosts.Add(HostHTTP);
-            Hosts.Add(HostTCP);
+            //Hosts.Add(HostTCP);
 
             string fileName = "config.json";
             IConfigManager configManager = new ConfigManager();
