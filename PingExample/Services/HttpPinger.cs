@@ -10,12 +10,12 @@ namespace PingExample
 {
     public class HttpPinger : IPinger
     {
-        private IPAddress Ip { get; set; }
+        //private IPAddress Ip { get; set; }
         private string Host;
         private HttpStatusCode _httpStatusCode;
         private ILogger _logger;
         private IPinger _pingerImplementation;
-        private HttpStatusCode previousStatus;
+        private HttpStatusCode previousStatus = HttpStatusCode.BadRequest;
         private HttpStatusCode currentStatus;
         private bool changedStatus = false;
         private bool isStarted = false;
@@ -37,7 +37,6 @@ namespace PingExample
 
        public async void Start()
         {
-            IPAddress Ip;
             HttpResponseMessage responseMessage;
             string FullHost;
             while (true)
@@ -48,12 +47,14 @@ namespace PingExample
                     currentDateTime = DateTime.Now;
                     try
                     {
+                        /*
                         if (!IPAddress.TryParse(Host, out Ip))
                         {
                             Ip = Dns.GetHostAddresses(Host).First();
                         }
+                        */
 
-                        if (!Regex.IsMatch(Host,"^(http|https)://"))
+                        if (!Regex.IsMatch(Host, "^(http|https)://"))
                         {
                             FullHost = "http://" + Host;
                         }
@@ -61,42 +62,45 @@ namespace PingExample
                         {
                             FullHost = Host;
                         }
-
-                    
-                        //первый пинг
                         responseMessage = await client.GetAsync(FullHost);
+                        currentStatus = responseMessage.StatusCode;
                         if (!isStarted)
                         {
-                            previousStatus = responseMessage.StatusCode;
+                            previousDateTime = currentDateTime;
                             isStarted = true;
                         }
+
                         currentStatus = responseMessage.StatusCode;
-                        if (previousStatus == currentStatus)
-                        {
-                            previousDateTime = currentDateTime;
-                        }
-                    
-                    
-                        if (previousStatus != currentStatus && (previousStatus == _httpStatusCode || currentStatus == _httpStatusCode))
-                        {
-                            Console.WriteLine($"{previousDateTime.ToString("yyyy/MM/dd hh:mm:ss")} HTTP Connect to {Host} ({Ip}) success");
-                            Console.WriteLine($"{currentDateTime.ToString("yyyy/MM/dd hh:mm:ss")} HTTP Connect to {Host} ({Ip}) success");
-                            _logger.WriteLog($"{previousDateTime.ToString("yyyy/MM/dd hh:mm:ss")} HTTP Connect to {Host} ({Ip}) success");
-                            _logger.WriteLog($"{currentDateTime.ToString("yyyy/MM/dd hh:mm:ss")} HTTP Connect to {Host} ({Ip}) success");
-                        }
-                        /*
-                    else
-                    {
-                        Console.WriteLine($"{now.ToString("yyyy/MM/dd hh:mm:ss")} HTTP Connect to {Host} ({Ip}) fail");
-                        _logger.WriteLog($"{now.ToString("yyyy/MM/dd hh:mm:ss")} HTTP Connect to {Host} ({Ip}) fail");
-                    }
-                    */
-    
+
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine($"{currentDateTime.ToString("yyyy/MM/dd hh:mm:ss")} HTTP Connect to {Host} error");
-                        _logger.WriteLog($"{currentDateTime.ToString("yyyy/MM/dd hh:mm:ss")} HTTP Connect to {Host} error");
+                        /*
+                        Console.WriteLine(
+                            $"{currentDateTime.ToString("yyyy/MM/dd hh:mm:ss")} HTTP Connect to {Host} error");
+                        _logger.WriteLog(
+                            $"{currentDateTime.ToString("yyyy/MM/dd hh:mm:ss")} HTTP Connect to {Host} error");
+                        */
+                        currentStatus = HttpStatusCode.BadRequest;
+                    }
+                    finally
+                    {
+                        if (previousStatus != currentStatus &&
+                            (previousStatus == _httpStatusCode || currentStatus == _httpStatusCode))
+                        {
+                            Console.WriteLine(
+                                $"{previousDateTime.ToString("yyyy/MM/dd hh:mm:ss")} HTTP Connect to {Host} {previousStatus}");
+                            Console.WriteLine(
+                                $"{currentDateTime.ToString("yyyy/MM/dd hh:mm:ss")} HTTP Connect to {Host} {currentStatus}");
+                            
+                            _logger.WriteLog(
+                                $"{previousDateTime.ToString("yyyy/MM/dd hh:mm:ss")} HTTP Connect to {Host} {previousStatus}");
+                            _logger.WriteLog(
+                                $"{currentDateTime.ToString("yyyy/MM/dd hh:mm:ss")} HTTP Connect to {Host} {currentStatus}");
+                            
+                        } 
+                        previousStatus = currentStatus;
+                        previousDateTime = currentDateTime;
                     }
                 }
                 Thread.Sleep(Period);
