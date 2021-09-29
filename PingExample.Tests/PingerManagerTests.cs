@@ -13,25 +13,34 @@ namespace PingExample.Tests
             
             var mockHost = new Mock<List<PingHost>>();
             var mockLogger = new Mock<ILogger>();
+            var mockPingerManager = new Mock<IPingerManager>();
             
+            mockPingerManager.Setup(pm => pm.StartPing());
+            /*
             PingerManager pingerManager = new PingerManager(mockHost.Object);
             pingerManager.SetLogger(mockLogger.Object);
             pingerManager.StartPing();
-            
-            mockLogger.Verify();
+            */
+
+            mockPingerManager.Verify();
         }
         
+        [Fact]
         public void StopPingTest()
         {
             
             var mockHost = new Mock<List<PingHost>>();
             var mockLogger = new Mock<ILogger>();
+            var mockPingerManager = new Mock<IPingerManager>();
             
+            mockPingerManager.Setup(pm => pm.StopPing());
+            /*
             PingerManager pingerManager = new PingerManager(mockHost.Object);
             pingerManager.SetLogger(mockLogger.Object);
             pingerManager.StopPing();
+            */
             
-            mockLogger.Verify();
+            mockPingerManager.Verify();
         }
         
         
