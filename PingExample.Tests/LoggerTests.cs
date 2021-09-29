@@ -1,3 +1,5 @@
+using Moq;
+using PingExample.Interfaces;
 using Xunit;
 
 namespace PingExample.Tests
@@ -7,7 +9,10 @@ namespace PingExample.Tests
         [Fact]
         public void WriteLogTest()
         {
+            var mock = new Mock<ILogger>();
+            mock.Setup(l => l.WriteLog(It.IsAny<string>()));
             
+            mock.Verify();
         } 
     }
 }

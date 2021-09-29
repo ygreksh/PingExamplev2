@@ -7,4 +7,4 @@ build_property.PublishSingleFile =
 build_property.IncludeAllContentForSelfExtract = 
 build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
 build_property.RootNamespace = PingExample.Tests
-build_property.ProjectDir = D:\Ygrek\Программирование\Csharp\PingExamplev2\PingExample.Tests\
+build_property.ProjectDir = D:\Old_D\INFO\Программирование\C Sharp\PingExample\PingExample.Tests\
