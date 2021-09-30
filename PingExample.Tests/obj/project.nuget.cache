@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2dNQGphqJLCX8LGd+FFSXR2QtFKgTyFz93doHLRDaa+vlLfgxr8TqpjZJji8fxx0XKcpyh2Ag0IsMOP004DFjg==",
+  "dgSpecHash": "QfcFXZHHnOb/SiYsAKXrWqFJB/NlV1KA8/eztCCfPLi+KrSLd0XmEPJfc116e7ERjEwvNruGnkg2I89fHYo0Uw==",
   "success": true,
-  "projectFilePath": "D:\\Old_D\\INFO\\Программирование\\C Sharp\\PingExample\\PingExample.Tests\\PingExample.Tests.csproj",
+  "projectFilePath": "D:\\Ygrek\\Программирование\\Csharp\\PingExamplev2\\PingExample.Tests\\PingExample.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ygrek\\.nuget\\packages\\castle.core\\4.4.0\\castle.core.4.4.0.nupkg.sha512",
     "C:\\Users\\ygrek\\.nuget\\packages\\coverlet.collector\\3.0.2\\coverlet.collector.3.0.2.nupkg.sha512",

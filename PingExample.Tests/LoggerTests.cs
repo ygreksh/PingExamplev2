@@ -10,9 +10,12 @@ namespace PingExample.Tests
         public void WriteLogTest()
         {
             var mock = new Mock<ILogger>();
-            mock.Setup(l => l.WriteLog(It.IsAny<string>()));
+            //mock.Setup(l => l.WriteLog(It.IsAny<string>()));
+
+            var logger = mock.Object;
+            logger.WriteLog(It.IsAny<string>());
             
-            mock.Verify();
+            mock.Verify(l => l.WriteLog(It.IsAny<string>()), Times.Once);
         } 
     }
 }

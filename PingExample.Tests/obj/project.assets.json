@@ -6276,19 +6276,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ygrek\\.nuget\\packages\\": {}
+    "C:\\Users\\ygrek\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Old_D\\INFO\\Программирование\\C Sharp\\PingExample\\PingExample.Tests\\PingExample.Tests.csproj",
+      "projectUniqueName": "D:\\Ygrek\\Программирование\\Csharp\\PingExamplev2\\PingExample.Tests\\PingExample.Tests.csproj",
       "projectName": "PingExample.Tests",
-      "projectPath": "D:\\Old_D\\INFO\\Программирование\\C Sharp\\PingExample\\PingExample.Tests\\PingExample.Tests.csproj",
+      "projectPath": "D:\\Ygrek\\Программирование\\Csharp\\PingExamplev2\\PingExample.Tests\\PingExample.Tests.csproj",
       "packagesPath": "C:\\Users\\ygrek\\.nuget\\packages\\",
-      "outputPath": "D:\\Old_D\\INFO\\Программирование\\C Sharp\\PingExample\\PingExample.Tests\\obj\\",
+      "outputPath": "D:\\Ygrek\\Программирование\\Csharp\\PingExamplev2\\PingExample.Tests\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
         "C:\\Users\\ygrek\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6302,8 +6307,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "D:\\Old_D\\INFO\\Программирование\\C Sharp\\PingExample\\PingExample\\PingExample.csproj": {
-              "projectPath": "D:\\Old_D\\INFO\\Программирование\\C Sharp\\PingExample\\PingExample\\PingExample.csproj"
+            "D:\\Ygrek\\Программирование\\Csharp\\PingExamplev2\\PingExample\\PingExample.csproj": {
+              "projectPath": "D:\\Ygrek\\Программирование\\Csharp\\PingExamplev2\\PingExample\\PingExample.csproj"
             }
           }
         }
